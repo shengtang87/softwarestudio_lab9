@@ -12,8 +12,23 @@ var Menu = /** @class */ (function (_super) {
     // ===================== TODO =====================
     // 1. Add dynamic click event to StartButton to call this
     //    function
+    Menu.prototype.Button_Init = function () {
+        var button_Act1 = new cc.Component.EventHandler();
+        button_Act1.target = this.node;
+        button_Act1.component = "Menu";
+        button_Act1.handler = "loadGameScene";
+        cc.find("Canvas/UI/StartButton").getComponent(cc.Button).clickEvents.push(button_Act1);
+    };
     Menu.prototype.loadGameScene = function () {
         cc.director.loadScene("game");
+    };
+    // ================================================
+    Menu.prototype.onLoad = function () {
+    };
+    Menu.prototype.start = function () {
+        this.Button_Init();
+    };
+    Menu.prototype.update = function () {
     };
     Menu = __decorate([
         ccclass

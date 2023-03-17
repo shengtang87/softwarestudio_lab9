@@ -180,14 +180,15 @@ export default class GameManager extends cc.Component {
     playBGM(){
         // ===================== TODO =====================
         // 1. Play music. The audio clip to play is this.bgm
-        
         // ================================================
+        cc.audioEngine.playMusic(this.bgm,true);
 
     }
 
     stopBGM(){
         // ===================== TODO =====================
         // 1. Stop music. 
+        cc.audioEngine.stopMusic();
 
         // ================================================
     }
@@ -196,6 +197,7 @@ export default class GameManager extends cc.Component {
         // ===================== TODO =====================
         // 1. Play sound effect. The audio clip to play is 
         //    this.correctSound
+        cc.audioEngine.playEffect(this.correctSound,false);
 
         // ================================================
     }
@@ -212,14 +214,15 @@ export default class GameManager extends cc.Component {
             containerSize = 369;
         }
         let circleSize = containerSize / row;
-
+        this.circleContainer.width=containerSize;
+        this.circleContainer.height=containerSize;
         // ===================== TODO =====================
         // 1. Update the size of circleContainer
         //
         // 2. Spawn [row]*[row] circles (this.circlePrefab)
         //    under circleContainer.
         //    (Be child nodes of the circleContainer node)
-        // 
+
         //    Hints:  cc.instantiate(), cc.Node.addChild()
         // 
         // 3. All circles should be place like a square matrix.
@@ -247,6 +250,29 @@ export default class GameManager extends cc.Component {
         //    if it is the answer. Otherwise, change the color to
         //    this.baseColor.
         // 
+
+        let ans=Math.floor(Math.random() * ((row*row)-1))
+
+        for(let c=0 ;c<row*row;c++){
+            let circle = cc.instantiate(this.circlePrefab);
+            circle.parent=this.circleContainer
+            circle.width=circleSize;
+            circle.height=circleSize
+            if (c==ans){
+                circle.getChildByName("Background").color=this.targetColor
+                
+                circle.on(cc.Node.EventType.MOUSE_DOWN, function(event){
+                    this.getResult(event,"Ans"); }, this);
+            }
+            else{
+                circle.getChildByName("Background").color=this.baseColor
+                
+                circle.on(cc.Node.EventType.MOUSE_DOWN, function(event){
+                    this.getResult(event,"FUCK"); }, this);
+            }
+        }
+        
+
         // 7. Add a click event to the Button component of
         //    each circle so that when you click on it,
         //    GameManager.getResult() will be called.

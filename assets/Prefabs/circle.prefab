@@ -212,7 +212,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "366d6832-3a29-4334-8929-70e1197ee163"
+      "__id__": 0
     },
     "fileId": "fdaFArOsRDv4i49fZ89Bjd",
     "sync": false
@@ -303,9 +303,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "366d6832-3a29-4334-8929-70e1197ee163"
+      "__id__": 0
     },
-    "fileId": "d2K5qiF31O1o/dycdUT04W",
+    "fileId": "",
     "sync": false
   }
 ]
